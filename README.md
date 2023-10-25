@@ -4,7 +4,9 @@ Blueprint is a microservice development toolchain that enables rapid Configure, 
 
 ## Availability
 
-Blueprint is available [here]().
+THe official release of Blueprint is coming soon. Once released, Blueprint will be available [here](https://github.com/Blueprint-uServices/blueprint).
+
+In the meantime, please join our mailing group [here](https://groups.google.com/g/blueprint-compiler).
 
 ## Publications
 
