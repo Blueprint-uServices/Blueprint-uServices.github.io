@@ -10,4 +10,4 @@ In the meantime, please join our mailing group [here](https://groups.google.com/
 
 ## Publications
 
-+ Blueprint: A Toolchain for Highly-Reconfigurable Microservice Applications, SOSP'23. [Paper](https://dl.acm.org/doi/10.1145/3600006.3613138), [Artifact](https://gitlab.mpi-sws.org/cld/blueprint/blueprint-sosp23-experiments)
++ Blueprint: A Toolchain for Highly-Reconfigurable Microservice Applications, SOSP'23. [Paper](https://dl.acm.org/doi/10.1145/3600006.3613138), [Paper + Appendix](https://vaastavanand.com/assets/pdf/anand2023blueprint.pdf), [Artifact](https://gitlab.mpi-sws.org/cld/blueprint/blueprint-sosp23-experiments)
