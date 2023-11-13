@@ -12,8 +12,7 @@ refactor: true
 
 <!-- Get pinned posts -->
 
-{% assign offset = paginator.page | minus: 1 | times: paginator.per_page %}
-{% assign pinned_num = pinned.size | minus: offset %}
+{% assign pinned_num = pinned.size %}
 
 {% if pinned_num > 0 %}
   {% for i in (offset..pinned.size) limit: pinned_num %}

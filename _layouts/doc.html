@@ -11,8 +11,7 @@ layout: page
 
 <!-- Get pinned posts -->
 
-{% assign offset = paginator.page | minus: 1 | times: paginator.per_page %}
-{% assign pinned_num = pinned.size | minus: offset %}
+{% assign pinned_num = pinned.size %}
 
 {% if pinned_num > 0 %}
   {% for i in (offset..pinned.size) limit: pinned_num %}
@@ -32,9 +31,12 @@ layout: page
 
 {% assign default_num = paginator.posts | size | minus: pinned_num %}
 {% assign default_end = default_beg | plus: default_num | minus: 1 %}
+{% assign paginator_size = paginator.posts | size %}
+{% assign posts_size = site.posts | size %}
+{% assign default_size = default | size %}
 
-{% if default_num > 0 %}
-  {% for i in (default_beg..default_end) %}
+{% if default_size > 0 %}
+  {% for i in (0..default.size) limit: default_size %}
     {% assign posts = posts | push: default[i] %}
   {% endfor %}
 {% endif %}
