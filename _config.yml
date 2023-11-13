@@ -109,8 +109,6 @@ assets:
 pwa:
   enabled: true # the option for PWA feature
 
-paginate: 10
-
 # The base URL of your site
 baseurl: ""
 
@@ -136,8 +134,6 @@ collections:
     permalink: /blog/:title/
   documents:
     output: true
-  publications:
-    output: true
 
 defaults:
   - scope:
@@ -162,12 +158,6 @@ defaults:
     values:
       layout: post
       permalink: /docs/:title/
-  - scope:
-      path: ""
-      type: publications
-    values:
-      layout: post
-      permalink: /pubs/:title/
   - scope:
       path: _drafts
     values:
