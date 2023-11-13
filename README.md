@@ -11,3 +11,27 @@ In the meantime, please join our mailing group [here](https://groups.google.com/
 ## Publications
 
 + Blueprint: A Toolchain for Highly-Reconfigurable Microservice Applications, SOSP'23. [Paper](https://dl.acm.org/doi/10.1145/3600006.3613138), [Paper + Appendix](https://vaastavanand.com/assets/pdf/anand2023blueprint.pdf), [Artifact](https://gitlab.mpi-sws.org/cld/blueprint/blueprint-sosp23-experiments)
+
+## Contributing to Website
+
+Step 1: Fork this repo
+Step 2: Add necessary markdown files.
+Step 3: Create a Merge Request
+
++ New Tutorial: Create a markdown file in the folder ```_posts```
++ New Blog Post: Create a markdown file in the folder ```_blogposts```
++ New Documentation Page: Create a markdown file in the folder ```_documents```
+
+## Deploying Website
+
+### Local deployment (launches on http://localhost:4000):
+
+```bash
+bundle exec jekyll serve
+```
+
+### Global deployment
+
+```bash
+./bin/deploy
+```
