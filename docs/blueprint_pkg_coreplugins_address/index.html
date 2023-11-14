@@ -1,0 +1,1750 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="en" data-mode="dark">
+  <!-- The Head -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  >
+
+  
+
+  
+
+  
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="blueprint/pkg/coreplugins/address" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="blueprint/pkg/coreplugins/address 1 package address // import &quot;gitlab.mpi-sws.org/cld/blueprint/blueprint/pkg/coreplugins/address&quot; 1 2 Package address provides IR nodes to represent addressing, particularly between clients and servers. 1 2 This plugin is primarily for use by other Blueprint plugins. It is not expected that a wiring spec needs to directly call methods from this package. 1 2 3 4 The main usage by other Blueprint plugins is the Define method, which will define an address that points to an IR node of a specified type. Within a buildfunc, plugins can directly get the address by name, or use the helper methods Bind and Dial to get only the relevant configuration nodes. node in order to discover the server’s address and its interface. But the client doesn’t want to accidentally instantiate the server in the wrong place. An Address node adds one layer of indirection to prevent this. dialling the address. 1 2 3 To implement addressing, several concerns are addressed: - when a client node is instantiated it usually wants to access the server - an address node takes care of configuration variables for binding and FUNCTIONS" />
+<meta property="og:description" content="blueprint/pkg/coreplugins/address 1 package address // import &quot;gitlab.mpi-sws.org/cld/blueprint/blueprint/pkg/coreplugins/address&quot; 1 2 Package address provides IR nodes to represent addressing, particularly between clients and servers. 1 2 This plugin is primarily for use by other Blueprint plugins. It is not expected that a wiring spec needs to directly call methods from this package. 1 2 3 4 The main usage by other Blueprint plugins is the Define method, which will define an address that points to an IR node of a specified type. Within a buildfunc, plugins can directly get the address by name, or use the helper methods Bind and Dial to get only the relevant configuration nodes. node in order to discover the server’s address and its interface. But the client doesn’t want to accidentally instantiate the server in the wrong place. An Address node adds one layer of indirection to prevent this. dialling the address. 1 2 3 To implement addressing, several concerns are addressed: - when a client node is instantiated it usually wants to access the server - an address node takes care of configuration variables for binding and FUNCTIONS" />
+<link rel="canonical" href="Blueprint-uServices.github.io/docs/blueprint_pkg_coreplugins_address/" />
+<meta property="og:url" content="Blueprint-uServices.github.io/docs/blueprint_pkg_coreplugins_address/" />
+<meta property="og:site_name" content="Blueprint" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-14T01:05:43+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="blueprint/pkg/coreplugins/address" />
+<meta name="twitter:site" content="@vaastav05" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-11-14T01:05:43+01:00","datePublished":"2023-11-14T01:05:43+01:00","description":"blueprint/pkg/coreplugins/address 1 package address // import &quot;gitlab.mpi-sws.org/cld/blueprint/blueprint/pkg/coreplugins/address&quot; 1 2 Package address provides IR nodes to represent addressing, particularly between clients and servers. 1 2 This plugin is primarily for use by other Blueprint plugins. It is not expected that a wiring spec needs to directly call methods from this package. 1 2 3 4 The main usage by other Blueprint plugins is the Define method, which will define an address that points to an IR node of a specified type. Within a buildfunc, plugins can directly get the address by name, or use the helper methods Bind and Dial to get only the relevant configuration nodes. node in order to discover the server’s address and its interface. But the client doesn’t want to accidentally instantiate the server in the wrong place. An Address node adds one layer of indirection to prevent this. dialling the address. 1 2 3 To implement addressing, several concerns are addressed: - when a client node is instantiated it usually wants to access the server - an address node takes care of configuration variables for binding and FUNCTIONS","headline":"blueprint/pkg/coreplugins/address","mainEntityOfPage":{"@type":"WebPage","@id":"Blueprint-uServices.github.io/docs/blueprint_pkg_coreplugins_address/"},"url":"Blueprint-uServices.github.io/docs/blueprint_pkg_coreplugins_address/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+  <title>blueprint/pkg/coreplugins/address | Blueprint
+  </title>
+
+  <!--
+  The Favicons for Web, Android, Microsoft, and iOS (iPhone and iPad) Apps
+  Generated by: https://realfavicongenerator.net/
+-->
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Blueprint">
+<meta name="application-name" content="Blueprint">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+  
+    
+      <link rel="preconnect" href="https://fonts.googleapis.com" >
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
+    
+      <link rel="preconnect" href="https://fonts.googleapis.com" >
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+      <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+    
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+  
+
+  <!-- GA -->
+  
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css">
+
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Manific Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css">
+  
+
+  <!-- JavaScript -->
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+</head>
+
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle">
+      
+        
+        <img src="/assets/img/Blueprint.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+      
+    </a>
+
+    <h1 class="site-title">
+      <a href="/">Blueprint</a>
+    </h1>
+    <p class="site-subtitle fst-italic mb-0">A toolchain for generating reconfigurable microservice applications.</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>HOME</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+        <li class="nav-item">
+          <a href="/publications/" class="nav-link">
+            <i class="fa-fw fas fa-paper-plane"></i>
+            
+
+            <span>PUBLICATIONS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tutorials/" class="nav-link">
+            <i class="fa-fw fas fa-flask"></i>
+            
+
+            <span>TUTORIALS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/blog/" class="nav-link">
+            <i class="fa-fw fas fa-stream"></i>
+            
+
+            <span>BLOG</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/docs/" class="nav-link">
+            <i class="fa-fw fas fa-book"></i>
+            
+
+            <span>DOCS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tags/" class="nav-link">
+            <i class="fa-fw fas fa-tag"></i>
+            
+
+            <span>TAGS</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    
+
+    
+      
+
+      
+        <a
+          href="https://github.com/Blueprint-uServices"
+          aria-label="github"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="https://twitter.com/vaastav05"
+          aria-label="twitter"
+          
+
+          
+            target="_blank"
+            
+          
+
+          
+
+          
+            rel="noopener noreferrer"
+          
+        >
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+      
+    
+      
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['vaastav','mpi-sws.org'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">
+                Home
+              </a>
+            </span>
+
+          
+        
+          
+        
+          
+            
+              <span>blueprint/pkg/coreplugins/address</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      Post
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="Search..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+<article class="px-1">
+  <header>
+    <h1 data-toc-skip>blueprint/pkg/coreplugins/address</h1>
+
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1699920343"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Nov 14, 2023
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+              <a href="https://twitter.com/vaastav05">Vaastav Anand</a>
+            
+          </em>
+        </span>
+
+        <!-- read time -->
+        <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="1006 words"
+>
+  <em>5 min</em> read</span>
+
+      </div>
+      <!-- .d-flex -->
+    </div>
+    <!-- .post-meta -->
+  </header>
+
+  <div class="content">
+    <h1 id="blueprintpkgcorepluginsaddress">blueprint/pkg/coreplugins/address</h1>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">package</span> <span class="n">address</span> <span class="c">// import "gitlab.mpi-sws.org/cld/blueprint/blueprint/pkg/coreplugins/address"</span>
+</pre></td></tr></tbody></table></code></div></div>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">Package</span> <span class="n">address</span> <span class="n">provides</span> <span class="n">IR</span> <span class="n">nodes</span> <span class="n">to</span> <span class="n">represent</span> <span class="n">addressing</span><span class="p">,</span> <span class="n">particularly</span> <span class="n">between</span>
+<span class="n">clients</span> <span class="n">and</span> <span class="n">servers</span><span class="o">.</span>
+</pre></td></tr></tbody></table></code></div></div>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="n">This</span> <span class="n">plugin</span> <span class="n">is</span> <span class="n">primarily</span> <span class="k">for</span> <span class="n">use</span> <span class="n">by</span> <span class="n">other</span> <span class="n">Blueprint</span> <span class="n">plugins</span><span class="o">.</span> <span class="n">It</span> <span class="n">is</span> <span class="n">not</span> <span class="n">expected</span>
+<span class="n">that</span> <span class="n">a</span> <span class="n">wiring</span> <span class="n">spec</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">directly</span> <span class="n">call</span> <span class="n">methods</span> <span class="n">from</span> <span class="n">this</span> <span class="k">package</span><span class="o">.</span>
+</pre></td></tr></tbody></table></code></div></div>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="n">The</span> <span class="n">main</span> <span class="n">usage</span> <span class="n">by</span> <span class="n">other</span> <span class="n">Blueprint</span> <span class="n">plugins</span> <span class="n">is</span> <span class="n">the</span> <span class="n">Define</span> <span class="n">method</span><span class="p">,</span> <span class="n">which</span> <span class="n">will</span>
+<span class="n">define</span> <span class="n">an</span> <span class="n">address</span> <span class="n">that</span> <span class="n">points</span> <span class="n">to</span> <span class="n">an</span> <span class="n">IR</span> <span class="n">node</span> <span class="n">of</span> <span class="n">a</span> <span class="n">specified</span> <span class="k">type</span><span class="o">.</span> <span class="n">Within</span> <span class="n">a</span>
+<span class="n">buildfunc</span><span class="p">,</span> <span class="n">plugins</span> <span class="n">can</span> <span class="n">directly</span> <span class="n">get</span> <span class="n">the</span> <span class="n">address</span> <span class="n">by</span> <span class="n">name</span><span class="p">,</span> <span class="n">or</span> <span class="n">use</span> <span class="n">the</span> <span class="n">helper</span>
+<span class="n">methods</span> <span class="n">Bind</span> <span class="n">and</span> <span class="n">Dial</span> <span class="n">to</span> <span class="n">get</span> <span class="n">only</span> <span class="n">the</span> <span class="n">relevant</span> <span class="n">configuration</span> <span class="n">nodes</span><span class="o">.</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>node in order to discover the server’s address and its interface. But the
+client doesn’t want to accidentally instantiate the server in the wrong
+place. An Address node adds one layer of indirection to prevent this.
+dialling the address.</p>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="n">To</span> <span class="n">implement</span> <span class="n">addressing</span><span class="p">,</span> <span class="n">several</span> <span class="n">concerns</span> <span class="n">are</span> <span class="n">addressed</span><span class="o">:</span>
+  <span class="o">-</span> <span class="n">when</span> <span class="n">a</span> <span class="n">client</span> <span class="n">node</span> <span class="n">is</span> <span class="n">instantiated</span> <span class="n">it</span> <span class="n">usually</span> <span class="n">wants</span> <span class="n">to</span> <span class="n">access</span> <span class="n">the</span> <span class="n">server</span>
+  <span class="o">-</span> <span class="n">an</span> <span class="n">address</span> <span class="n">node</span> <span class="n">takes</span> <span class="n">care</span> <span class="n">of</span> <span class="n">configuration</span> <span class="n">variables</span> <span class="k">for</span> <span class="n">binding</span> <span class="n">and</span>
+</pre></td></tr></tbody></table></code></div></div>
+<h2 id="functions"><span class="me-2">FUNCTIONS</span><a href="#functions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h2 id="func-assignports"><span class="me-2">func AssignPorts</span><a href="#func-assignports" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">AssignPorts</span><span class="p">(</span><span class="n">hostname</span> <span class="kt">string</span><span class="p">,</span> <span class="n">nodes</span> <span class="p">[]</span><span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">)</span> <span class="kt">error</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>AssignPorts is a helper method intended for use by namespace nodes when
+they are compiling code and concrete ports must be assigned to BindConfig IR
+nodes.</p>
+
+<p>The provided nodes can be any IR nodes; this method will filter out only the
+BindConfig nodes.</p>
+
+<p>Some of the provided nodes might already be assigned to a particular port.
+This method will not change those port assignments, though it will return an
+error if two nodes are already pre-assigned to the same port.</p>
+
+<p>Ports will be assigned either ascending from port 2000, or ascending from a
+node’s preferred port if a preference was specified.</p>
+
+<p>After calling this method, any provided BindConfig IR nodes will have their
+hostname and port set.</p>
+
+<h2 id="func-checkports"><span class="me-2">func CheckPorts</span><a href="#func-checkports" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">CheckPorts</span><span class="p">(</span><span class="n">nodes</span> <span class="p">[]</span><span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">)</span> <span class="kt">error</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>Returns an error if there are BindConfig nodes in the provided list that
+haven’t been allocated a port.</p>
+
+<h2 id="func-defineservertype"><span class="me-2">func Define[ServerType</span><a href="#func-defineservertype" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">Define</span><span class="p">[</span><span class="n">ServerType</span> <span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">](</span><span class="n">spec</span> <span class="n">wiring</span><span class="o">.</span><span class="n">WiringSpec</span><span class="p">,</span> <span class="n">addressName</span> <span class="kt">string</span><span class="p">,</span> <span class="n">pointsTo</span> <span class="kt">string</span><span class="p">,</span> <span class="n">reachability</span> <span class="n">any</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>Defines an address called addressName whose server-side node has name
+pointsTo.</p>
+
+<p>This method is primarily intended for use by other Blueprint plugins.</p>
+
+<p>The type parameter ServerType should correspond to the node type of
+pointsTo.</p>
+
+<p>Reachability of an address defines how far up the parent namespaces the
+address should exist and be reachable. By default most addresses will want
+to use ir.ApplicationNode as the reachability to indicate that the address
+can be reached by any node anywhere in the application.</p>
+
+<h2 id="func-pointsto"><span class="me-2">func PointsTo</span><a href="#func-pointsto" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">PointsTo</span><span class="p">(</span><span class="n">namespace</span> <span class="n">wiring</span><span class="o">.</span><span class="n">Namespace</span><span class="p">,</span> <span class="n">addressName</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>Returns the value of pointsTo that was provided when addressName was
+defined.</p>
+
+<p>Used by the pointer plugin.</p>
+
+<h2 id="func-resetports"><span class="me-2">func ResetPorts</span><a href="#func-resetports" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">ResetPorts</span><span class="p">(</span><span class="n">nodes</span> <span class="p">[]</span><span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>Clears the hostname and port from any BindConfig node.</p>
+
+<p>This is used by namespace nodes when performing address translation, e.g.
+between ports within a container vs. external to a container.</p>
+
+<h2 id="types"><span class="me-2">TYPES</span><a href="#types" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>The main implementation of the Node interface.</p>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="k">type</span> <span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span> <span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">]</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">AddrName</span> <span class="kt">string</span>
+	<span class="n">Server</span>   <span class="n">ServerType</span>
+	<span class="n">Bind</span>     <span class="o">*</span><span class="n">BindConfig</span> <span class="c">// Configuration value for the bind address</span>
+	<span class="n">Dial</span>     <span class="o">*</span><span class="n">DialConfig</span> <span class="c">// Configuration value for the dial address</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>In addition to storing the destination IR node, the address also comes with
+two configuration IR nodes: a BindConfig that is the bind address of the
+destination node, and a DialConfig that is the address callers should dial.</p>
+
+<h2 id="func-bindservertype"><span class="me-2">func Bind[ServerType</span><a href="#func-bindservertype" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">Bind</span><span class="p">[</span><span class="n">ServerType</span> <span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">](</span><span class="n">namespace</span> <span class="n">wiring</span><span class="o">.</span><span class="n">Namespace</span><span class="p">,</span> <span class="n">addressName</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">],</span> <span class="kt">error</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>Gets the BindConfig configuration node of addressName from the namespace.</p>
+
+<p>This method is intended for use by other Blueprint plugins within their own
+BuildFuncs.</p>
+
+<p>This is a convenience method for use when only the dial address is needed.
+It is equivalent to getting addressName directly from namespace and then
+reading then [Address.Bind] field.</p>
+
+<h2 id="func-dialservertype"><span class="me-2">func Dial[ServerType</span><a href="#func-dialservertype" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">Dial</span><span class="p">[</span><span class="n">ServerType</span> <span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">](</span><span class="n">namespace</span> <span class="n">wiring</span><span class="o">.</span><span class="n">Namespace</span><span class="p">,</span> <span class="n">addressName</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">],</span> <span class="kt">error</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>Gets the DialConfig configuration node of addressName from the namespace.</p>
+
+<p>This method is intended for use by other Blueprint plugins within their own
+BuildFuncs.</p>
+
+<p>This is a convenience method for use when only the dial address is needed.
+It is equivalent to getting addressName directly from namespace and then
+reading then [Address.Dial] field.</p>
+
+<h2 id="func"><span class="me-2">func</span><a href="#func" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">addr</span> <span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">])</span> <span class="n">GetDestination</span><span class="p">()</span> <span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-1"><span class="me-2">func</span><a href="#func-1" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">addr</span> <span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">])</span> <span class="n">ImplementsAddressNode</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-2"><span class="me-2">func</span><a href="#func-2" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">addr</span> <span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">])</span> <span class="n">ImplementsIRMetadata</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-3"><span class="me-2">func</span><a href="#func-3" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">addr</span> <span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">])</span> <span class="n">Name</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-4"><span class="me-2">func</span><a href="#func-4" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">addr</span> <span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">])</span> <span class="n">SetDestination</span><span class="p">(</span><span class="n">node</span> <span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">)</span> <span class="kt">error</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-5"><span class="me-2">func</span><a href="#func-5" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">addr</span> <span class="o">*</span><span class="n">Address</span><span class="p">[</span><span class="n">ServerType</span><span class="p">])</span> <span class="n">String</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>IR config node representing an address that a server should bind to.</p>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="k">type</span> <span class="n">BindConfig</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">PreferredPort</span> <span class="kt">uint16</span>
+	<span class="c">// Has unexported fields.</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></div></div>
+<h2 id="func-6"><span class="me-2">func</span><a href="#func-6" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">BindConfig</span><span class="p">)</span> <span class="n">HasValue</span><span class="p">()</span> <span class="kt">bool</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-7"><span class="me-2">func</span><a href="#func-7" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">BindConfig</span><span class="p">)</span> <span class="n">ImplementsBindConfig</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-8"><span class="me-2">func</span><a href="#func-8" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">BindConfig</span><span class="p">)</span> <span class="n">ImplementsIRConfig</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-9"><span class="me-2">func</span><a href="#func-9" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">BindConfig</span><span class="p">)</span> <span class="n">Name</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-10"><span class="me-2">func</span><a href="#func-10" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">BindConfig</span><span class="p">)</span> <span class="n">Optional</span><span class="p">()</span> <span class="kt">bool</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-11"><span class="me-2">func</span><a href="#func-11" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">BindConfig</span><span class="p">)</span> <span class="n">String</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-12"><span class="me-2">func</span><a href="#func-12" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">BindConfig</span><span class="p">)</span> <span class="n">Value</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<p>IR config node representing an address that a client should dial.</p>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">type</span> <span class="n">DialConfig</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="c">// Has unexported fields.</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></div></div>
+<h2 id="func-13"><span class="me-2">func</span><a href="#func-13" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">DialConfig</span><span class="p">)</span> <span class="n">HasValue</span><span class="p">()</span> <span class="kt">bool</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-14"><span class="me-2">func</span><a href="#func-14" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">DialConfig</span><span class="p">)</span> <span class="n">ImplementsDialConfig</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-15"><span class="me-2">func</span><a href="#func-15" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">DialConfig</span><span class="p">)</span> <span class="n">ImplementsIRConfig</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-16"><span class="me-2">func</span><a href="#func-16" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">DialConfig</span><span class="p">)</span> <span class="n">Name</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-17"><span class="me-2">func</span><a href="#func-17" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">DialConfig</span><span class="p">)</span> <span class="n">Optional</span><span class="p">()</span> <span class="kt">bool</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-18"><span class="me-2">func</span><a href="#func-18" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">DialConfig</span><span class="p">)</span> <span class="n">String</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<h2 id="func-19"><span class="me-2">func</span><a href="#func-19" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="p">(</span><span class="n">conf</span> <span class="o">*</span><span class="n">DialConfig</span><span class="p">)</span> <span class="n">Value</span><span class="p">()</span> <span class="kt">string</span>
+</pre></td></tr></tbody></table></code></div></div>
+
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="k">type</span> <span class="n">Node</span> <span class="k">interface</span> <span class="p">{</span>
+	<span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span>
+	<span class="n">ir</span><span class="o">.</span><span class="n">IRMetadata</span>
+</pre></td></tr></tbody></table></code></div></div>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>	<span class="c">// Returns the server-side of an address if it has been instantiated; nil otherwise</span>
+	<span class="n">GetDestination</span><span class="p">()</span> <span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span>
+</pre></td></tr></tbody></table></code></div></div>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>	<span class="c">// Sets the server-side of the address to be the provided node.</span>
+	<span class="n">SetDestination</span><span class="p">(</span><span class="n">ir</span><span class="o">.</span><span class="n">IRNode</span><span class="p">)</span> <span class="kt">error</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>IR metadata node representing an address.</p>
+<div class="language-go highlighter-rouge"><div class="code-header">
+        <span data-label-text="Go"><i class="fas fa-code fa-fw small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>	<span class="n">ImplementsAddressNode</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></div></div>
+<p>The main purpose of this node is to enable client nodes to link to server
+nodes lazily without inadvertently instantiating the server nodes in the
+wrong namespace.</p>
+
+<p>During the build process, the destination node of an address will be stored
+on this node. That enables clients, later, to call methods on the server
+node, e.g. to get the interface that the server node exposes.</p>
+
+<p>The main implementation of this interface is Address</p>
+
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+
+    <!-- tags -->
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=blueprint/pkg/coreplugins/address%20-%20Blueprint&url=Blueprint-uServices.github.io%2Fdocs%2Fblueprint_pkg_coreplugins_address%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=blueprint/pkg/coreplugins/address%20-%20Blueprint&u=Blueprint-uServices.github.io%2Fdocs%2Fblueprint_pkg_coreplugins_address%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=Blueprint-uServices.github.io%2Fdocs%2Fblueprint_pkg_coreplugins_address%2F&text=blueprint/pkg/coreplugins/address%20-%20Blueprint" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
+
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 mb-5 text-muted">
+            <div class="access">
+              <!-- Get the last 5 posts from lastmod list. -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/adding-plugins/">adding plugins</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/getting-started/">getting started</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+              
+              
+
+
+
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/docs/blueprint_pkg_blueprint_logging/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>blueprint/pkg/blueprint/logging</p>
+    </a>
+  
+
+  
+    <a
+      href="/docs/blueprint_pkg_coreplugins_backend/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>blueprint/pkg/coreplugins/backend</p>
+    </a>
+  
+</nav>
+
+            
+              
+              <!--  The comments switcher -->
+
+
+            
+
+            <!-- The Footer -->
+
+<footer
+  aria-label="Site Info"
+  class="
+    d-flex flex-column justify-content-center text-muted
+    flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
+  "
+>
+  <p>
+    ©
+    <time>2023</time>
+    <a href="https://twitter.com/vaastav05">Vaastav Anand</a>.
+    
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author."
+      >Some rights reserved.</span>
+    
+  </p>
+
+  <p>Using the <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme for <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>.
+  </p>
+</footer>
+
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">Trending Tags</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/adding-plugins/">adding plugins</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/getting-started/">getting started</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">A new version of content is available.</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      Update
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- JavaScripts -->
+
+    <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js,npm/tocbot@4.21.3/dist/tocbot.min.js"></script>
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+
+
+
+    
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>
+  /* Note: dependent library will be loaded in `js-selector.html` */
+  SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('search-results'),
+    json: '/assets/js/data/search.json',
+    searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{snippet}</p>  </article>',
+    noResultsText: '<p class="mt-5"></p>',
+    templateMiddleware: function(prop, value, template) {
+      if (prop === 'categories') {
+        if (value === '') {
+          return `${value}`;
+        } else {
+          return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+        }
+      }
+
+      if (prop === 'tags') {
+        if (value === '') {
+          return `${value}`;
+        } else {
+          return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+        }
+      }
+    }
+  });
+</script>
+
+  </body>
+</html>
+
