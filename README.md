@@ -22,6 +22,14 @@ Step 3: Create a Merge Request
 + New Blog Post: Create a markdown file in the folder ```_blogposts```
 + New Documentation Page: Create a markdown file in the folder ```_documents```
 
+### Updating Documentation
+
+You can update documentation using the following script
+
+```bash
+./copy_docs.sh <path/to/blueprint-repo>
+```
+
 ## Deploying Website
 
 ### Local deployment (launches on http://localhost:4000):
