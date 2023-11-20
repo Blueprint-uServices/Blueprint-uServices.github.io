@@ -15,7 +15,9 @@ In the meantime, please join our mailing group [here](https://groups.google.com/
 ## Contributing to Website
 
 Step 1: Fork this repo
+
 Step 2: Add necessary markdown files.
+
 Step 3: Create a Merge Request
 
 + New Tutorial: Create a markdown file in the folder ```_posts```
