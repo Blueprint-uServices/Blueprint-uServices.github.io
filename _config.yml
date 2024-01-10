@@ -134,6 +134,8 @@ collections:
     permalink: /blog/:title/
   documents:
     output: true
+  applications:
+    output: true
 
 defaults:
   - scope:
