@@ -10,6 +10,9 @@
   icon: "fas fa-envelope"
   noblank: true # open link in current tab
 
+- type: slack
+  icon: "fab fa-slack"
+
 # - type: rss
 #   icon: "fas fa-rss"
 #   noblank: true

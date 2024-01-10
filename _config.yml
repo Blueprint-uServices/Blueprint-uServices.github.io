@@ -31,11 +31,14 @@ github:
 twitter:
   username: vaastav05 # change to your twitter username
 
+slack:
+  server: blueprint-uservices
+
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Vaastav Anand
-  email: vaastav@mpi-sws.org # change to your email address
+  email: blueprint-uservices@googlegroups.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/vaastav05 # change to your twitter homepage

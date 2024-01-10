@@ -72,6 +72,10 @@
           {%- endcapture -%}
         {% when 'rss' %}
           {% assign url = '/feed.xml' | relative_url %}
+        {% when 'slack' %}
+          {%- capture url -%}
+            https://{{ site[entry.type].server }}.slack.com
+          {%- endcapture -%}
         {% else %}
           {% assign url = entry.url %}
       {% endcase %}
