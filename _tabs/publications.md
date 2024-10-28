@@ -13,6 +13,8 @@ order: 1
 &nbsp;
 <a href="/assets/slides/sosp2023.pdf" style="text-decoration: none"><i class="fa fa-layer-group fa-xl"></i></a>
 &nbsp;
+<a href="https://www.youtube.com/watch?v=atTX2PRHY7Q" style="text-decoration: none"><i class="fa fa-solid fa-video fa-xl"></i></a>
+&nbsp;
 <a href="https://sosp2023.mpi-sws.org/" style="text-decoration: none"><i class="fa fa-location-dot fa-xl"></i>&nbsp;SOSP'23</a>
 </span>
 
