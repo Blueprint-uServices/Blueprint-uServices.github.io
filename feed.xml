@@ -1,0 +1,108 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>Blueprint-uServices.github.io/</id>
+  <title>Blueprint</title>
+  <subtitle>A toolchain for generating reconfigurable microservice applications.</subtitle>
+  <updated>2024-10-28T23:02:58+01:00</updated>
+  <author>
+    <name>Vaastav Anand</name>
+    <uri>Blueprint-uServices.github.io/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="Blueprint-uServices.github.io/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="Blueprint-uServices.github.io/"/>
+  <generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
+  <rights> © 2024 Vaastav Anand </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Getting Started</title>
+    <link href="Blueprint-uServices.github.io/posts/getting-started/" rel="alternate" type="text/html" title="Getting Started" />
+    <published>2019-08-09T14:55:00+02:00</published>
+  
+    <updated>2019-08-09T14:55:00+02:00</updated>
+  
+    <id>Blueprint-uServices.github.io/posts/getting-started/</id>
+    <content src="Blueprint-uServices.github.io/posts/getting-started/" />
+    <author>
+      <name>cotes</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Prerequisites
+
+Follow the instructions in the Jekyll Docs to complete the installation of the basic environment. Git also needs to be installed.
+
+Installation
+
+Creating a New Site
+
+There are two ways to create a new repository for this theme:
+
+
+  Using the Chirpy Starter - Easy to upgrade, isolates irrelevant project files so you can focus on writing.
+  GitHub Fork - Convenient for custom devel...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Adding a New Plugin</title>
+    <link href="Blueprint-uServices.github.io/posts/adding-plugins/" rel="alternate" type="text/html" title="Adding a New Plugin" />
+    <published>2019-08-09T14:55:00+02:00</published>
+  
+    <updated>2019-08-09T14:55:00+02:00</updated>
+  
+    <id>Blueprint-uServices.github.io/posts/adding-plugins/</id>
+    <content src="Blueprint-uServices.github.io/posts/adding-plugins/" />
+    <author>
+      <name>vaastav</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+
