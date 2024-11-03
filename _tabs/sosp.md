@@ -26,4 +26,8 @@ The tutorial will be held on 3rd November, 2024 in Room 616A.
 
 ### Tutorial Material
 
-All material from the tutorial including slides and code repositories will be posted here closer at the start of the tutorial event.
+We will be using the [sosp_tutorial](https://github.com/Blueprint-uServices/sosp_tutorial) repository for this tutorial.
+
+## Communication
+
+Please join our slack space using this [invite](https://join.slack.com/t/blueprint-uservices/shared_invite/zt-2f2ku60b8-vy8hDPWbkwLKSMalyIUzPA") link. Join the official communications channel `sosp24-tutorial` to communicate with the organizers and other attendees.
