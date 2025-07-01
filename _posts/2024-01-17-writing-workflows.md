@@ -1,9 +1,11 @@
 ---
 title: Introduction to Workflow Specs
 author: vaastav
-date: 2024-08-09 20:55:00 +0800
+date: 2024-01-17 16:55:00 -0900
 categories: [Tutorial]
 tags: [workflow]
+target_url: https://github.com/Blueprint-uServices/blueprint/blob/main/docs/manual/workflow.md
+description: A brief introduction to writing a workflow specification.
 ---
 
 A **Workflow Spec** or just **Workflow** defines the core business logic of an application.  For example, in a social network application, the workflow defines how users can upload posts, view their timeline feed, follow other users, etc.

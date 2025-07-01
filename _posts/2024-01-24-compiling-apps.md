@@ -1,9 +1,11 @@
 ---
 title: Introduction to Wiring Specs
 author: vaastav
-date: 2024-08-09 20:55:00 +0800
+date: 2024-01-24 16:55:00 -0900
 categories: [Tutorial]
 tags: [wiring]
+target_url: https://github.com/Blueprint-uServices/blueprint/blob/main/docs/manual/wiring.md
+description: A brief introduction to writing a wiring specification.
 ---
 
 A **Wiring Spec** or just **Wiring** instantiates services, connects them together, and specifies how they should be modified, configured, and deployed.  Wiring specs are separate from workflow specs, because the same workflow logic can be instantiated in many different ways.
