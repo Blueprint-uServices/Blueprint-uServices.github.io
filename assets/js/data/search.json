@@ -1,20 +1,72 @@
----
-layout: compress
-swcache: true
----
-
 [
-  {% for post in site.posts %}
+  
   {
-    "title": {{ post.title | jsonify }},
-    "url": {{ post.url | relative_url | jsonify }},
-    "categories": {{ post.categories | join: ', ' | jsonify }},
-    "tags": {{ post.tags | join: ', ' | jsonify }},
-    "date": "{{ post.date }}",
-    {% include no-linenos.html content=post.content %}
-    {% assign _content = content | strip_html | strip_newlines %}
-    "snippet": {{ _content | truncate: 200 | jsonify }},
-    "content": {{ _content | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
+    "title": "Adding a New Plugin",
+    "url": "/posts/adding-plugins/",
+    "categories": "Blogging, Tutorial",
+    "tags": "plugins",
+    "date": "2024-01-29 16:25:00 +0100",
+    
+
+
+
+
+
+    
+    "snippet": "",
+    "content": ""
+  },
+  
+  {
+    "title": "Introduction to Wiring Specs",
+    "url": "/posts/compiling-apps/",
+    "categories": "Tutorial",
+    "tags": "wiring",
+    "date": "2024-01-25 02:55:00 +0100",
+    
+
+
+
+
+
+    
+    "snippet": "A Wiring Spec or just Wiring instantiates services, connects them together, and specifies how they should be modified, configured, and deployed.  Wiring specs are separate from workflow specs, beca...",
+    "content": "A Wiring Spec or just Wiring instantiates services, connects them together, and specifies how they should be modified, configured, and deployed.  Wiring specs are separate from workflow specs, because the same workflow logic can be instantiated in many different ways.Wiring specs are written as standalone go programs; invoking the program will compile the application.  To dive straight in to examples, see the SockShop wiring.Project LayoutBy convention we recommend placing wiring specs in a sibling module wiring alongside the workflow spec workflow.  The wiring subdirectory will be a golang module that contains your wiring spec implementation(s).  Your wiring module will likely want dependencies on the following modules:  github.com/blueprint-uservices/blueprint/blueprint - the core blueprint compiler  github.com/blueprint-uservices/blueprint/plugins - plugins that implement much of the wiring functionalityOverviewA wiring spec does the following:  It defines the instances that will exist when we run the program.  It configures how those instances are deployed (e.g. within processes, containers, etc.)  It connects instances together that communicate with each other  It enables and configures features, such as tracing, that should be applied to instances.When we execute a wiring spec, it compiles the application that was defined, generating all artifacts needed to actually run the application.  When we talk about instantiating services in the wiring spec, we mean defining service instances that will be compiled.After executing a wiring spec, it will be up to you to actually run the application using the compiled artifacts.  Blueprint attempts to make this step as straightforward as possible, but it will typically still involve setting some environment variables and issuing a run command (e.g. a docker or kubernetes command).Writing a Wiring Spec, Simple ExampleImportsimport \"github.com/blueprint-uservices/blueprint/blueprint/pkg/wiring\"Initialize a new wiring specspec := wiring.NewWiringSpec(\"my_application\")Next, you would instantiate services using Blueprint plugins, which we describe in more detail below.After instantiating services we construct the IRvar nodesToBuild []string     // populated when instantiating servicesapplicationIR, err := spec.BuildIR(nodesToBuild...)  // Construct the IRConstructing the IR might yield some errors if the wiring spec has errors, inconsistencies, or incompatible choicesWe finally generate artifacts for the IR:outputDir := \"build\"err = applicationIR.GenerateArtifacts(outputDir)If we then run the application, it will generate artifacts to outputDir.  (Note: the example above will not generate anything, because it doesn’t instantiate any services).Wiring Spec BasicsCreate a ServiceTo define a service instance, we use Blueprint’s workflow plugin.Initialize a service that exists within the workflow spec.echo_service := workflow.Service[workflow.EchoService](spec, \"echo_service\")In the above example, we create an instance of “EchoService” and we call it “echo_service”.  For more details on creating services, see the workflow plugin documentation.To explicitly instantiate echo_service we will also need to add it to nodesToBuild:nodesToBuild = append(nodesToBuild, \"echo_service\")Note: it is unnecessary to explicitly add every service to nodesToBuild.  Blueprint can recursively discover service instances by following the dependencies between services, so typically the only service that needs to explicitly added to nodesToBuild is the front-end API service of the application (e.g. nodesToBuild := []string{\"frontend_service\"}).  This is usually sufficient to discover all other services in the application.Modify a ServiceElsewhere in the wiring spec, if we wish to refer to the echo service, then we will do so by (string) name (\"echo_service\").  For example, the grpc plugin lets us deploy services using gRPC:grpc.Deploy(spec, \"echo_service\")In general, Blueprint plugins will expose a few methods that can be used within a wiring spec to define or modify service instances.  This functionality is entirely plugin-specific, so each plugin will define and document how it is supposed to be used.PluginsWe provide a non-exhaustive list of the more important Blueprint plugins on the 📝Wiring Spec Plugins page of the User Manual.  An exhaustive list of plugins can be found in the plugins module.Examples of plugin usage can be found in the example applications, such as the Leaf Application and the Sock Shop Application.CmdbuilderIt is usually useful to define multiple wiring specs for your application.  If this is the case, the cmdbuilder is a useful way of doing so.  All applications in the examples directory make use of the cmdbuilder, and can be consulted for example usage."
+  },
+  
+  {
+    "title": "Introduction to Workflow Specs",
+    "url": "/posts/writing-workflows/",
+    "categories": "Tutorial",
+    "tags": "workflow",
+    "date": "2024-01-18 02:55:00 +0100",
+    
+
+
+
+
+
+    
+    "snippet": "A Workflow Spec or just Workflow defines the core business logic of an application.  For example, in a social network application, the workflow defines how users can upload posts, view their timeli...",
+    "content": "A Workflow Spec or just Workflow defines the core business logic of an application.  For example, in a social network application, the workflow defines how users can upload posts, view their timeline feed, follow other users, etc.In Blueprint, a workflow is implemented without reference to any of the libraries of infrastructure needed to deploy the workflow.  A workflow does not need to bind to an RPC library like gRPC or implement a mechanism like retries.  Instead, these are integrated into the workflow code later by Blueprint’s Compiler.While developing an application’s workflow, the philosophy should be to assume nothing about exactly how the application will be deployed.  Services might be deployed into different processes running on the same machine; in containers distributed across a cluster; or even, directly combined into a single monolith application.Project LayoutA Blueprint application will likely comprise several golang modules, primarily for the application’s workflow spec and wiring spec(s).  By convention, we recommend placing these modules in sibling directories (e.g. workflow and wiring directories).The Sock Shop application demonstrates this structure and convention.The workflow subdirectory will contain your workflow implementation.  Your workflow module will likely want a dependency on the github.com/blueprint-uservices/blueprint/runtime module.Later, you may choose to also create a tests module for Workflow Tests and a workload module for a custom Workload Generator, though these are not needed yet.Workflow ServicesA Workflow consists of a number of inter-related Services.  A service is akin to a microservice or a class that provides some public methods; other services can call those methods.Define a service by declaring an interface with some methods:type EchoService interface {    // Echoes the provided message back to the caller    Echo(ctx context.Context, message string) (string, error)}Implement the service with a structtype echoServiceImpl struct {}func NewEchoService(ctx context.Context) (EchoService, error) {    return &amp;echoServiceImpl{}, nil}func (s *echoServiceImpl) Echo(ctx context.Context, message string) (string, error) {    return message, nil}The above is sufficient to compile the EchoService to a process, docker container, etc. and make use of any of the plugins offered by Blueprint.RulesBlueprint requires the following from workflow services:  A service must be defined by an interface, e.g. EchoService  The first argument of all service methods is a context.Context  The final return value of all service methods is an error  A service constructor must be defined that returns a service instance, e.g. NewEchoService  The first argument of a constructor must be a context.Context  The return value of a constructor must be the service instance and an error, e.g. (EchoService, error)A workflow can import and make use of any 3rd party libraries it desires.Calling other Workflow ServicesA service can make calls to other services.  To do so, the service needs a reference to those other services.type MultiEchoer struct {    // Calls the EchoService n times    MultiEcho(ctx context.Context, message string, times int) (string, error)}type multiEchoerImpl struct {    echo EchoService}func NewMultiEchoer(ctx context.Context, echo EchoService) (MultiEchoer, error) {    return &amp;multiEchoerImpl{echo: echo}}func (s *multiEchoerImpl) MultiEcho(ctx context.Context, message string, times int) (string, error) {    var b strings.Builder    for i := 0; i &lt; times; i++ {        echoed, err := s.echo.Echo(ctx, message)        if err != nil {            return \"\", err        }        b.WriteString(echoed + \"\\n\")    }    return b.String(), nil}In the above, MultiEchoer calls Echo by directly invoking s.echo.Echo.The above is sufficient for the MultiEchoer service to be compiled and deployed, and to call the EchoService even if running in a different process, machine, or container.Rules for Calling other Services  If a service calls another service, it can only receive a reference to the other service as a constructor argument, e.g. NewMultiEchoer(ctx context.Context, echo EchoService).  It cannot instantiate the other service directly.BackendsSome services want to persist data in backends, such as in a database, or make use of other features like a cache.  Backends behave much like services: they have an interface, and Blueprint is responsible for compiling them.Several backends are defined in Blueprint’s runtime module.  To make use of them, use the following import:import \"github.com/blueprint-uservices/blueprint/runtime/core/backend\"We can update the MultiEchoer to use a backend.Cache and attempt to lookup cached entries.type MultiEchoer struct {    // Calls the EchoService n times    MultiEcho(ctx context.Context, message string, times int) (string, error)}type multiEchoerImpl struct {    echo EchoService    cache backend.Cache}func NewMultiEchoer(ctx context.Context, echo EchoService, cache backend.Cache) (MultiEchoer, error) {    return &amp;multiEchoerImpl{echo: echo, cache: cache}}func (s *multiEchoerImpl) MultiEcho(ctx context.Context, message string, times int) (string, error) {    var b strings.Builder    for i := 0; i &lt; times; i++ {        var echoed string        if err := s.cache.Get(ctx, message, &amp;echoed); err != nil {            // not present in cache; call EchoService            echoed, err = s.echo.Echo(ctx, message)            if err != nil {                return \"\", err            }            s.cache.Put(ctx, message, echoed)        }        b.WriteString(echoed + \"\\n\")    }    return b.String(), nil}Rules for backendsBackends do not impose any additional rules.  Like services, they must be passed as constructor arguments.List of backendsThe runtime/core package provides the interfaces for a number of commonplace backends.import \"github.com/blueprint-uservices/blueprint/runtime/core/backend\"  backend.Cache an interface for key-value caches; implementations for use in Wiring Specs include simplecache and memcached  backend.Queue an interface for queues with push/pop; implementations for use in Wiring Specs include simplequeue and rabbitmq  backend.NoSQLDatabase an interface for NoSQL databases that uses MongoDB-style BSON queries; implementations for use in Wiring Specs include simplenosqldb and mongodb  backend.RelationalDB an interface for SQL-based relational databases; implementations for use in Wiring Specs include simplereldb and mysqlBackground TasksSome services might want to run additional background goroutines.  For example, a service that polls a queue will need to have a goroutine to do so.The recommended way to implement background goroutines is by implementing a method Run(context.Context) error.  This will be automatically invoked in the generated code.func (s *multiEchoerImpl) Run(ctx context.Context) error {    fmt.Println(\"I'm running from a different goroutine!\")}"
+  },
+  
+  {
+    "title": "Getting Started",
+    "url": "/posts/getting-started/",
+    "categories": "Blogging, Tutorial",
+    "tags": "getting started",
+    "date": "2024-01-17 02:55:00 +0100",
+    
+
+
+
+
+
+    
+    "snippet": "",
+    "content": ""
+  }
+  
 ]
+
