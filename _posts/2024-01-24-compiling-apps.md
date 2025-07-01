@@ -1,6 +1,6 @@
 ---
 title: Introduction to Wiring Specs
-author: vaastav
+author: jcmace
 date: 2024-01-24 16:55:00 -0900
 categories: [Tutorial]
 tags: [wiring]

@@ -1,6 +1,6 @@
 ---
 title: Introduction to Workflow Specs
-author: vaastav
+author: jcmace
 date: 2024-01-17 16:55:00 -0900
 categories: [Tutorial]
 tags: [workflow]

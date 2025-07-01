@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-author: vaastav
+author: jcmace
 date: 2024-01-16 16:55:00 -0900
 categories: [Blogging, Tutorial]
 tags: [getting started]
