@@ -36,24 +36,25 @@
   
     <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.3.2" />
-<meta property="og:title" content="Blueprint" />
+<meta property="og:title" content="healthchecker" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="A toolchain for generating reconfigurable microservice applications." />
-<meta property="og:description" content="A toolchain for generating reconfigurable microservice applications." />
-<link rel="canonical" href="Blueprint-uServices.github.io/" />
-<meta property="og:url" content="Blueprint-uServices.github.io/" />
+<meta name="description" content="Package healthchecker provides a Blueprint modifier for the server side of a service.The plugin extends the service interface with a `Health` method that returns a success string if the service is healthy. Note- The plugin __does not__ check the health of all of the dependencies of the service." />
+<meta property="og:description" content="Package healthchecker provides a Blueprint modifier for the server side of a service.The plugin extends the service interface with a `Health` method that returns a success string if the service is healthy. Note- The plugin __does not__ check the health of all of the dependencies of the service." />
+<link rel="canonical" href="Blueprint-uServices.github.io/docs/healthchecker/" />
+<meta property="og:url" content="Blueprint-uServices.github.io/docs/healthchecker/" />
 <meta property="og:site_name" content="Blueprint" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-10T00:00:00+01:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Blueprint" />
+<meta property="twitter:title" content="healthchecker" />
 <meta name="twitter:site" content="@vaastav05" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"A toolchain for generating reconfigurable microservice applications.","headline":"Blueprint","name":"Vaastav Anand","sameAs":["https://twitter.com/vaastav05","https://github.com/Blueprint-uServices"],"url":"Blueprint-uServices.github.io/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-01-10T00:00:00+01:00","datePublished":"2024-01-10T00:00:00+01:00","description":"Package healthchecker provides a Blueprint modifier for the server side of a service.The plugin extends the service interface with a `Health` method that returns a success string if the service is healthy. Note- The plugin __does not__ check the health of all of the dependencies of the service.","headline":"healthchecker","mainEntityOfPage":{"@type":"WebPage","@id":"Blueprint-uServices.github.io/docs/healthchecker/"},"url":"Blueprint-uServices.github.io/docs/healthchecker/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
 
-  <title>Blueprint
+  <title>healthchecker | Blueprint
   </title>
 
   <!--
@@ -111,6 +112,9 @@
   
 
   
+    <!-- Manific Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css">
+  
 
   <!-- JavaScript -->
 
@@ -143,7 +147,7 @@
   <nav class="flex-column flex-grow-1 w-100 ps-0">
     <ul class="nav">
       <!-- home -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a href="/" class="nav-link">
           <i class="fa-fw fas fa-home"></i>
           <span>HOME</span>
@@ -344,9 +348,25 @@
       
 
       
-        <!-- index page -->
-        <span>Home</span>
+        
+          
+            <span>
+              <a href="/">
+                Home
+              </a>
+            </span>
 
+          
+        
+          
+        
+          
+            
+              <span>healthchecker</span>
+            
+
+          
+        
       
     </nav>
     <!-- endof #breadcrumb -->
@@ -356,7 +376,7 @@
     </button>
 
     <div id="topbar-title">
-      Blueprint
+      Post
     </div>
 
     <button type="button" id="search-trigger" class="btn btn-link">
@@ -449,19 +469,166 @@
 
 
 
-<div id="post-list" class="flex-grow-1 px-xl-1">
-  <h1>Blueprint</h1>
-  <p>
-    Blueprint is a microservice development toolchain designed to make it easier for researchers to easily prototype infrastructure for microservice applications and compile those prototypes into a variety of benchmark applications.
-  </p>
-  <p>
+<article class="px-1">
+  <header>
+    <h1 data-toc-skip>healthchecker</h1>
 
-  Blueprint is currently in Beta and is available on our <a href="https://github.com/Blueprint-uServices">github</a>.
-  </p>
-  <p>
-    In the meantime, please join our <a href="https://groups.google.com/g/blueprint-uservices">mailing group</a> and our <a href="https://join.slack.com/t/blueprint-uservices/shared_invite/zt-2f2ku60b8-vy8hDPWbkwLKSMalyIUzPA">slack workspace</a>.
-  </p>
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1704841200"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Jan 10, 2024
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+              <a href="https://twitter.com/vaastav05">Vaastav Anand</a>
+            
+          </em>
+        </span>
+
+        <!-- read time -->
+        <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="0 words"
+>
+  <em>1 min</em> read</span>
+
+      </div>
+      <!-- .d-flex -->
+    </div>
+    <!-- .post-meta -->
+  </header>
+
+  <div class="content">
+    
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+
+    <!-- tags -->
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=healthchecker%20-%20Blueprint&url=Blueprint-uServices.github.io%2Fdocs%2Fhealthchecker%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=healthchecker%20-%20Blueprint&u=Blueprint-uServices.github.io%2Fdocs%2Fhealthchecker%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=Blueprint-uServices.github.io%2Fdocs%2Fhealthchecker%2F&text=healthchecker%20-%20Blueprint" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
 </div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
 
 
             
@@ -634,12 +801,89 @@
             </div>
 
             
+              
+              
+
+
+
+
+            
           </aside>
         </div>
 
         <div class="row">
           <!-- tail -->
           <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/docs/grpc/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>grpc</p>
+    </a>
+  
+
+  
+    <a
+      href="/docs/http/"
+      class="btn btn-outline-primary"
+      aria-label="Newer"
+    >
+      <p>http</p>
+    </a>
+  
+</nav>
+
+            
+              
+              <!--  The comments switcher -->
+
+
             
 
             <!-- The Footer -->
@@ -850,6 +1094,9 @@
   
 
   
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
 
 
 
@@ -921,16 +1168,30 @@
 
   
 
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
 
 
-  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js"></script>
 
 
 
 
 
 
-<script defer src="/assets/js/dist/home.min.js"></script>
+<script defer src="/assets/js/dist/post.min.js"></script>
 
 
 

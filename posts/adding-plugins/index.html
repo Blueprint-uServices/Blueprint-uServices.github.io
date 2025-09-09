@@ -36,24 +36,27 @@
   
     <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.3.2" />
-<meta property="og:title" content="Blueprint" />
+<meta property="og:title" content="Adding a New Plugin" />
+<meta name="author" content="Vaastav Anand" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="A toolchain for generating reconfigurable microservice applications." />
-<meta property="og:description" content="A toolchain for generating reconfigurable microservice applications." />
-<link rel="canonical" href="Blueprint-uServices.github.io/" />
-<meta property="og:url" content="Blueprint-uServices.github.io/" />
+<meta name="description" content="This page describes the steps needed to add a new plugin to Blueprint" />
+<meta property="og:description" content="This page describes the steps needed to add a new plugin to Blueprint" />
+<link rel="canonical" href="Blueprint-uServices.github.io/posts/adding-plugins/" />
+<meta property="og:url" content="Blueprint-uServices.github.io/posts/adding-plugins/" />
 <meta property="og:site_name" content="Blueprint" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-01-29T16:25:00+01:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Blueprint" />
+<meta property="twitter:title" content="Adding a New Plugin" />
 <meta name="twitter:site" content="@vaastav05" />
+<meta name="twitter:creator" content="@vaastav05" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"A toolchain for generating reconfigurable microservice applications.","headline":"Blueprint","name":"Vaastav Anand","sameAs":["https://twitter.com/vaastav05","https://github.com/Blueprint-uServices"],"url":"Blueprint-uServices.github.io/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Vaastav Anand","url":"https://vaastavanand.com/"},"dateModified":"2024-01-29T16:25:00+01:00","datePublished":"2024-01-29T16:25:00+01:00","description":"This page describes the steps needed to add a new plugin to Blueprint","headline":"Adding a New Plugin","mainEntityOfPage":{"@type":"WebPage","@id":"Blueprint-uServices.github.io/posts/adding-plugins/"},"url":"Blueprint-uServices.github.io/posts/adding-plugins/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
 
-  <title>Blueprint
+  <title>Adding a New Plugin | Blueprint
   </title>
 
   <!--
@@ -105,11 +108,16 @@
   <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
 
   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.3/dist/tocbot.min.css">
+  
 
   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
   
 
+  
+    <!-- Manific Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css">
   
 
   <!-- JavaScript -->
@@ -143,7 +151,7 @@
   <nav class="flex-column flex-grow-1 w-100 ps-0">
     <ul class="nav">
       <!-- home -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a href="/" class="nav-link">
           <i class="fa-fw fas fa-home"></i>
           <span>HOME</span>
@@ -344,9 +352,25 @@
       
 
       
-        <!-- index page -->
-        <span>Home</span>
+        
+          
+            <span>
+              <a href="/">
+                Home
+              </a>
+            </span>
 
+          
+        
+          
+        
+          
+            
+              <span>Adding a New Plugin</span>
+            
+
+          
+        
       
     </nav>
     <!-- endof #breadcrumb -->
@@ -356,7 +380,7 @@
     </button>
 
     <div id="topbar-title">
-      Blueprint
+      Post
     </div>
 
     <button type="button" id="search-trigger" class="btn btn-link">
@@ -449,19 +473,186 @@
 
 
 
-<div id="post-list" class="flex-grow-1 px-xl-1">
-  <h1>Blueprint</h1>
-  <p>
-    Blueprint is a microservice development toolchain designed to make it easier for researchers to easily prototype infrastructure for microservice applications and compile those prototypes into a variety of benchmark applications.
-  </p>
-  <p>
+<article class="px-1">
+  <header>
+    <h1 data-toc-skip>Adding a New Plugin</h1>
 
-  Blueprint is currently in Beta and is available on our <a href="https://github.com/Blueprint-uServices">github</a>.
-  </p>
-  <p>
-    In the meantime, please join our <a href="https://groups.google.com/g/blueprint-uservices">mailing group</a> and our <a href="https://join.slack.com/t/blueprint-uservices/shared_invite/zt-2f2ku60b8-vy8hDPWbkwLKSMalyIUzPA">slack workspace</a>.
-  </p>
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        Posted
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1706541900"
+  data-df="ll"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  Jan 29, 2024
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          By
+
+          <em>
+            
+              
+                <a href="https://vaastavanand.com/">Vaastav Anand</a>
+                
+              
+            
+          </em>
+        </span>
+
+        <!-- read time -->
+        <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="0 words"
+>
+  <em>1 min</em> read</span>
+
+      </div>
+      <!-- .d-flex -->
+    </div>
+    <!-- .post-meta -->
+  </header>
+
+  <div class="content">
+    
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/blogging/">Blogging</a>,
+          <a href="/categories/tutorial/">Tutorial</a>
+      </div>
+    
+
+    <!-- tags -->
+    
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/plugins/"
+            class="post-tag no-text-decoration"
+          >plugins</a>
+        
+      </div>
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          This post is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         by the author.
+        
+      </div>
+
+      <!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">Share</span>
+  <span class="share-icons">
+    
+    
+    
+
+    
+
+      
+
+      <a href="https://twitter.com/intent/tweet?text=Adding%20a%20New%20Plugin%20-%20Blueprint&url=Blueprint-uServices.github.io%2Fposts%2Fadding-plugins%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter">
+        <i class="fa-fw fa-brands fa-square-x-twitter"></i>
+      </a>
+    
+
+      
+
+      <a href="https://www.facebook.com/sharer/sharer.php?title=Adding%20a%20New%20Plugin%20-%20Blueprint&u=Blueprint-uServices.github.io%2Fposts%2Fadding-plugins%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook">
+        <i class="fa-fw fab fa-facebook-square"></i>
+      </a>
+    
+
+      
+
+      <a href="https://t.me/share/url?url=Blueprint-uServices.github.io%2Fposts%2Fadding-plugins%2F&text=Adding%20a%20New%20Plugin%20-%20Blueprint" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram">
+        <i class="fa-fw fab fa-telegram"></i>
+      </a>
+    
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Copy link"
+      data-title-succeed="Link copied successfully!"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+  </span>
 </div>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
 
 
             
@@ -634,12 +825,242 @@
             </div>
 
             
+              
+              
+
+
+
+
+            
           </aside>
         </div>
 
         <div class="row">
           <!-- tail -->
           <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">Further Reading</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/getting-started/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1705456500"
+  data-df="ll"
+  
+>
+  Jan 17, 2024
+</time>
+
+              <h4 class="pt-0 my-2">Getting Started</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  
+
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/writing-workflows/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1705542900"
+  data-df="ll"
+  
+>
+  Jan 18, 2024
+</time>
+
+              <h4 class="pt-0 my-2">Introduction to Workflow Specs</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  A Workflow Spec or just Workflow defines the core business logic of an application.  For example, in a social network application, the workflow defines how users can upload posts, view their timeli...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/compiling-apps/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1706147700"
+  data-df="ll"
+  
+>
+  Jan 25, 2024
+</time>
+
+              <h4 class="pt-0 my-2">Introduction to Wiring Specs</h4>
+              <div class="text-muted">
+                <p>
+                  
+
+
+
+
+
+                  A Wiring Spec or just Wiring instantiates services, connects them together, and specifies how they should be modified, configured, and deployed.  Wiring specs are separate from workflow specs, beca...
+                </p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/compiling-apps/"
+      class="btn btn-outline-primary"
+      aria-label="Older"
+    >
+      <p>Introduction to Wiring Specs</p>
+    </a>
+  
+
+  
+    <div class="btn btn-outline-primary disabled" aria-label="Newer">
+      <p>-</p>
+    </div>
+  
+</nav>
+
+            
+              
+              <!--  The comments switcher -->
+
+
             
 
             <!-- The Footer -->
@@ -850,6 +1271,9 @@
   
 
   
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
 
 
 
@@ -921,16 +1345,30 @@
 
   
 
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
 
 
-  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.1/dist/jquery.min.js,npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.10/dayjs.min.js,npm/dayjs@1.11.10/locale/en.min.js,npm/dayjs@1.11.10/plugin/relativeTime.min.js,npm/dayjs@1.11.10/plugin/localizedFormat.min.js"></script>
 
 
 
 
 
 
-<script defer src="/assets/js/dist/home.min.js"></script>
+<script defer src="/assets/js/dist/post.min.js"></script>
 
 
 

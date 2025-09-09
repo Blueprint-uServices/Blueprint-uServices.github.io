@@ -1,0 +1,169 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>Blueprint-uServices.github.io/</id>
+  <title>Blueprint</title>
+  <subtitle>A toolchain for generating reconfigurable microservice applications.</subtitle>
+  <updated>2025-09-09T23:43:25+02:00</updated>
+  <author>
+    <name>Vaastav Anand</name>
+    <uri>Blueprint-uServices.github.io/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="Blueprint-uServices.github.io/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="Blueprint-uServices.github.io/"/>
+  <generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
+  <rights> © 2025 Vaastav Anand </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Adding a New Plugin</title>
+    <link href="Blueprint-uServices.github.io/posts/adding-plugins/" rel="alternate" type="text/html" title="Adding a New Plugin" />
+    <published>2024-01-29T16:25:00+01:00</published>
+  
+    <updated>2024-01-29T16:25:00+01:00</updated>
+  
+    <id>Blueprint-uServices.github.io/posts/adding-plugins/</id>
+    <content src="Blueprint-uServices.github.io/posts/adding-plugins/" />
+    <author>
+      <name>vaastav</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Introduction to Wiring Specs</title>
+    <link href="Blueprint-uServices.github.io/posts/compiling-apps/" rel="alternate" type="text/html" title="Introduction to Wiring Specs" />
+    <published>2024-01-25T02:55:00+01:00</published>
+  
+    <updated>2025-07-01T22:05:24+02:00</updated>
+  
+    <id>Blueprint-uServices.github.io/posts/compiling-apps/</id>
+    <content src="Blueprint-uServices.github.io/posts/compiling-apps/" />
+    <author>
+      <name>jcmace</name>
+    </author>
+
+  
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      A Wiring Spec or just Wiring instantiates services, connects them together, and specifies how they should be modified, configured, and deployed.  Wiring specs are separate from workflow specs, because the same workflow logic can be instantiated in many different ways.
+
+Wiring specs are written as standalone go programs; invoking the program will compile the application.  To dive straight in to ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Introduction to Workflow Specs</title>
+    <link href="Blueprint-uServices.github.io/posts/writing-workflows/" rel="alternate" type="text/html" title="Introduction to Workflow Specs" />
+    <published>2024-01-18T02:55:00+01:00</published>
+  
+    <updated>2025-07-01T22:05:24+02:00</updated>
+  
+    <id>Blueprint-uServices.github.io/posts/writing-workflows/</id>
+    <content src="Blueprint-uServices.github.io/posts/writing-workflows/" />
+    <author>
+      <name>jcmace</name>
+    </author>
+
+  
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      A Workflow Spec or just Workflow defines the core business logic of an application.  For example, in a social network application, the workflow defines how users can upload posts, view their timeline feed, follow other users, etc.
+
+In Blueprint, a workflow is implemented without reference to any of the libraries of infrastructure needed to deploy the workflow.  A workflow does not need to bind ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Getting Started</title>
+    <link href="Blueprint-uServices.github.io/posts/getting-started/" rel="alternate" type="text/html" title="Getting Started" />
+    <published>2024-01-17T02:55:00+01:00</published>
+  
+    <updated>2025-07-01T22:05:24+02:00</updated>
+  
+    <id>Blueprint-uServices.github.io/posts/getting-started/</id>
+    <content src="Blueprint-uServices.github.io/posts/getting-started/" />
+    <author>
+      <name>jcmace</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      
+
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+
